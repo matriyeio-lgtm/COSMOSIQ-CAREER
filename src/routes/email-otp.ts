@@ -27,7 +27,7 @@ const MAILER_URL       = 'https://mail.cosmosiqcareers.com/mailer.php'
 // For local dev, set in .dev.vars file
 const INTERNAL_API_KEY = 'SET_VIA_CLOUDFLARE_SECRET'  // wrangler secret put INTERNAL_API_KEY
 
-export const otpRoutes = new Hono<{ Bindings: Bindings }>()
+export function registerOtpRoutes(app: Hono<{ Bindings: Bindings }>) {
 
 // ── Utility: Generate 6-digit OTP ─────────────────────────────────────────────
 function generateOTP(): string {
@@ -436,7 +436,7 @@ async function sendOTPEmail(
 // POST /api/otp/send — Generate OTP and email it
 // Body: { email, name?, mode: 'login'|'signup', role?: 'seeker'|'employer' }
 // ══════════════════════════════════════════════════════════════════════════════
-otpRoutes.post('/api/otp/send', async (c) => {
+app.post('/api/otp/send', async (c) => {
   try {
     const body  = await c.req.json() as any
     const email = (body.email || '').trim().toLowerCase()
@@ -501,7 +501,7 @@ otpRoutes.post('/api/otp/send', async (c) => {
 // POST /api/otp/verify — Verify OTP and create session
 // Body: { email, otp, mode, name?, role? }
 // ══════════════════════════════════════════════════════════════════════════════
-otpRoutes.post('/api/otp/verify', async (c) => {
+app.post('/api/otp/verify', async (c) => {
   try {
     const body  = await c.req.json() as any
     const email = (body.email || '').trim().toLowerCase()
@@ -598,7 +598,7 @@ otpRoutes.post('/api/otp/verify', async (c) => {
 // POST /api/otp/resend — Resend OTP
 // Body: { email, mode, name? }
 // ══════════════════════════════════════════════════════════════════════════════
-otpRoutes.post('/api/otp/resend', async (c) => {
+app.post('/api/otp/resend', async (c) => {
   try {
     const body  = await c.req.json() as any
     const email = (body.email || '').trim().toLowerCase()
@@ -641,7 +641,7 @@ otpRoutes.post('/api/otp/resend', async (c) => {
 // GET /api/email/test — Live diagnostic: tests email providers from CF Worker
 // Usage: GET /api/email/test?to=you@example.com
 // ══════════════════════════════════════════════════════════════════════════════
-otpRoutes.get('/api/email/test', async (c) => {
+app.get('/api/email/test', async (c) => {
   const to   = c.req.query('to') || 'matriyeio@gmail.com'
   const results: Record<string, any> = {}
 
@@ -679,3 +679,5 @@ otpRoutes.get('/api/email/test', async (c) => {
 
   return c.json(results, 200)
 })
+
+} // end registerOtpRoutes

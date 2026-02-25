@@ -25,12 +25,12 @@ const FROM_EMAIL       = 'noreply@cosmosiqcareers.com'
 const FROM_NAME        = 'CosmosIQ Careers'
 const MAILER_URL       = 'https://mail.cosmosiqcareers.com/mailer.php'  // GoDaddy fallback
 
-export const emailApiRoutes = new Hono<{ Bindings: Bindings }>()
+export function registerEmailApiRoutes(app: Hono<{ Bindings: Bindings }>) {
 
 // ══════════════════════════════════════════════════════════════════════════════
 // POST /api/v1/emails — Send a transactional email
 // ══════════════════════════════════════════════════════════════════════════════
-emailApiRoutes.post('/api/v1/emails', async (c) => {
+app.post('/api/v1/emails', async (c) => {
   try {
     // ── Auth ───────────────────────────────────────────────────────────────────
     const apiKey   = c.req.header('X-API-Key') || c.req.header('x-api-key') || ''
@@ -100,7 +100,7 @@ emailApiRoutes.post('/api/v1/emails', async (c) => {
 // ══════════════════════════════════════════════════════════════════════════════
 // GET /api/v1/emails/health
 // ══════════════════════════════════════════════════════════════════════════════
-emailApiRoutes.get('/api/v1/emails/health', (c) => {
+app.get('/api/v1/emails/health', (c) => {
   const hasBrevo = !!(c.env?.BREVO_API_KEY)
   return c.json({
     status:    'ok',
@@ -115,6 +115,8 @@ emailApiRoutes.get('/api/v1/emails/health', (c) => {
     }
   })
 })
+
+} // end registerEmailApiRoutes
 
 // ══════════════════════════════════════════════════════════════════════════════
 // Brevo (Sendinblue) SMTP API
@@ -187,6 +189,7 @@ async function sendViaCpanelMailer(email: {
         text:    email.text
       })
     })
+
 
     const contentType = res.headers.get('content-type') || ''
     if (!contentType.includes('application/json')) {

@@ -1,8 +1,8 @@
 import { Hono } from 'hono'
 import { JOBS, BLOG_POSTS, JOB_CATEGORIES } from './data/index'
-import { authRoutes } from './routes/oauth'
-import { otpRoutes } from './routes/email-otp'
-import { emailApiRoutes } from './routes/email-api'
+import { registerAuthRoutes } from './routes/oauth'
+import { registerOtpRoutes } from './routes/email-otp'
+import { registerEmailApiRoutes } from './routes/email-api'
 import { homePage } from './pages/home'
 import { jobsPage } from './pages/jobs'
 import { loginPage, signupPage, forgotPasswordPage } from './pages/auth'
@@ -146,14 +146,14 @@ app.use('*', async (c, next) => {
   )
 })
 
-// ── OAuth Routes (Google + LinkedIn) ─────────────────────────────────────────
-app.route('/', authRoutes)
+// ── OAuth Routes (Google + LinkedIn) — registered directly on main app so c.env works
+registerAuthRoutes(app)
 
 // ── Internal Email API (POST /api/v1/emails) ─────────────────────────────────
-app.route('/', emailApiRoutes)
+registerEmailApiRoutes(app)
 
 // ── Email OTP Routes ──────────────────────────────────────────────────────────
-app.route('/', otpRoutes)
+registerOtpRoutes(app)
 
 // ── Home ──────────────────────────────────────────────────────────────────────
 app.get('/', (c) => c.html(homePage()))

@@ -22,7 +22,7 @@ const BUILD_LINKEDIN_CLIENT_ID    = process.env.LINKEDIN_CLIENT_ID    || 'SET_VI
 const BUILD_LINKEDIN_CLIENT_SECRET = process.env.LINKEDIN_CLIENT_SECRET || 'SET_VIA_CLOUDFLARE_SECRET'
 const BUILD_BASE_URL              = 'https://cosmosiqcareers.com'
 
-export const authRoutes = new Hono<{ Bindings: Bindings }>()
+export function registerAuthRoutes(app: Hono<{ Bindings: Bindings }>) {
 
 // ── Utility: Generate random state string ────────────────────────────────────
 function generateState(): string {
@@ -58,7 +58,7 @@ function parseSessionToken(token: string): Record<string, string> | null {
 // ══════════════════════════════════════════════════════════════════════════════
 
 // Step 1: Redirect to Google Authorization
-authRoutes.get('/auth/google', (c) => {
+app.get('/auth/google', (c) => {
   const clientId = c.env?.GOOGLE_CLIENT_ID || BUILD_GOOGLE_CLIENT_ID
   const baseUrl  = c.env?.BASE_URL          || BUILD_BASE_URL
 
@@ -89,7 +89,7 @@ authRoutes.get('/auth/google', (c) => {
 })
 
 // Step 2: Handle Google Callback
-authRoutes.get('/auth/google/callback', async (c) => {
+app.get('/auth/google/callback', async (c) => {
   const clientId     = c.env?.GOOGLE_CLIENT_ID     || BUILD_GOOGLE_CLIENT_ID
   const clientSecret = c.env?.GOOGLE_CLIENT_SECRET || BUILD_GOOGLE_CLIENT_SECRET
   const baseUrl      = c.env?.BASE_URL              || BUILD_BASE_URL
@@ -183,7 +183,7 @@ authRoutes.get('/auth/google/callback', async (c) => {
 // Email is NOT requested (requires "Sign In with LinkedIn using OpenID Connect"
 // product to be fully enabled). We fall back gracefully to LinkedIn username.
 
-authRoutes.get('/auth/linkedin', (c) => {
+app.get('/auth/linkedin', (c) => {
   const clientId = c.env?.LINKEDIN_CLIENT_ID || BUILD_LINKEDIN_CLIENT_ID
   const baseUrl  = c.env?.BASE_URL            || BUILD_BASE_URL
 
@@ -208,10 +208,10 @@ authRoutes.get('/auth/linkedin', (c) => {
 })
 
 // Keep /auth/linkedin/legacy as alias
-authRoutes.get('/auth/linkedin/legacy', (c) => c.redirect('/auth/linkedin'))
+app.get('/auth/linkedin/legacy', (c) => c.redirect('/auth/linkedin'))
 
 // Step 2: Handle LinkedIn Callback (handles both OIDC and legacy)
-authRoutes.get('/auth/linkedin/callback', async (c) => {
+app.get('/auth/linkedin/callback', async (c) => {
   const clientId     = c.env?.LINKEDIN_CLIENT_ID     || BUILD_LINKEDIN_CLIENT_ID
   const clientSecret = c.env?.LINKEDIN_CLIENT_SECRET || BUILD_LINKEDIN_CLIENT_SECRET
   const baseUrl      = c.env?.BASE_URL                || BUILD_BASE_URL
@@ -327,7 +327,7 @@ authRoutes.get('/auth/linkedin/callback', async (c) => {
 // ══════════════════════════════════════════════════════════════════════════════
 // SUCCESS PAGE — Shown after successful OAuth login
 // ══════════════════════════════════════════════════════════════════════════════
-authRoutes.get('/auth/success', (c) => {
+app.get('/auth/success', (c) => {
   const sessionToken = getCookie(c, 'cosmosiq_session')
   const user = sessionToken ? parseSessionToken(sessionToken) : null
 
@@ -478,7 +478,7 @@ authRoutes.get('/auth/success', (c) => {
 // ══════════════════════════════════════════════════════════════════════════════
 // LOGOUT
 // ══════════════════════════════════════════════════════════════════════════════
-authRoutes.get('/auth/logout', (c) => {
+app.get('/auth/logout', (c) => {
   deleteCookie(c, 'cosmosiq_session', { path: '/' })
   deleteCookie(c, 'oauth_state', { path: '/' })
   return c.redirect('/login?message=logged_out')
@@ -487,7 +487,7 @@ authRoutes.get('/auth/logout', (c) => {
 // ══════════════════════════════════════════════════════════════════════════════
 // API: Get current session user
 // ══════════════════════════════════════════════════════════════════════════════
-authRoutes.get('/api/auth/me', (c) => {
+app.get('/api/auth/me', (c) => {
   const sessionToken = getCookie(c, 'cosmosiq_session')
   const user = sessionToken ? parseSessionToken(sessionToken) : null
   if (!user) return c.json({ authenticated: false, user: null }, 401)
@@ -613,6 +613,8 @@ function linkedinSetupGuidePage(): string {
 </body>
 </html>`
 }
+
+} // end registerAuthRoutes
 
 // ══════════════════════════════════════════════════════════════════════════════
 // ERROR PAGE TEMPLATE
