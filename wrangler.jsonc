@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cosmosiq-portal",
+  "compatibility_date": "2026-02-25",
+  "pages_build_output_dir": "./dist",
+  "compatibility_flags": ["nodejs_compat"],
+  "kv_namespaces": [
+    {
+      "binding": "OTP_KV",
+      "id": "6c3b23b576324e65a77c82b0bf4d1394"
+    }
+  ]
+}
