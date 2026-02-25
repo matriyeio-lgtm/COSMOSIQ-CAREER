@@ -1,50 +1,95 @@
 # CosmosIQ Careers — robots.txt
-# https://cosmosiqcareers.com
+# https://cosmosiqcareers.com/robots.txt
+# Last updated: 2026-02-25
 
+# ── All search crawlers ────────────────────────────────────────────────────
 User-agent: *
 Allow: /
-
-# Public pages — always crawl
 Allow: /jobs
-Allow: /jobs?*
+Allow: /jobs/
 Allow: /companies
 Allow: /about
 Allow: /blog
-Allow: /blog/*
 Allow: /careers
 Allow: /contact
 Allow: /terms
 Allow: /privacy
 Allow: /sitemap.xml
 
-# Block admin & private pages
+# Block private / sensitive areas
 Disallow: /admin
-Disallow: /admin/*
+Disallow: /admin/
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /employer
+Disallow: /employer/
+Disallow: /login
+Disallow: /signup
+Disallow: /forgot-password
+Disallow: /verify-otp
+Disallow: /register
+Disallow: /post-job
+Disallow: /api/
+Disallow: /auth/
+Disallow: /*.json$
+
+# ── Googlebot (faster crawl) ───────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+Allow: /jobs
+Allow: /companies
+Allow: /about
+Allow: /blog
+Allow: /careers
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Disallow: /admin
 Disallow: /dashboard
 Disallow: /employer
 Disallow: /login
 Disallow: /signup
-Disallow: /forgot-password
-Disallow: /otp-verify
 Disallow: /api/
 Disallow: /auth/
-Disallow: /register
-Disallow: /post-job
-
-# Crawl delay
-Crawl-delay: 1
-
-# Googlebot — no delay, max speed
-User-agent: Googlebot
-Allow: /
 Crawl-delay: 0
 
-# Bing
+# ── Bingbot ────────────────────────────────────────────────────────────────
 User-agent: Bingbot
 Allow: /
+Allow: /jobs
+Allow: /companies
+Allow: /about
+Allow: /blog
+Allow: /careers
+Allow: /contact
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /api/
 Crawl-delay: 1
 
-# Block aggressive scrapers
+# ── Block AI scrapers (no training on our content) ────────────────────────
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# ── Block low-quality crawlers ─────────────────────────────────────────────
 User-agent: AhrefsBot
 Disallow: /
 
@@ -57,5 +102,8 @@ Disallow: /
 User-agent: MJ12bot
 Disallow: /
 
-# Sitemaps
+User-agent: Bytespider
+Disallow: /
+
+# ── Sitemap location ───────────────────────────────────────────────────────
 Sitemap: https://cosmosiqcareers.com/sitemap.xml

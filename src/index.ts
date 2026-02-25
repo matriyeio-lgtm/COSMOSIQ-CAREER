@@ -51,8 +51,10 @@ function adminLoginPage(error = ''): string {
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Admin Login — CosmosIQ</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/></noscript>
+  <script>window.tailwind={config:{}}</script>
+  <script src="https://cdn.tailwindcss.com" defer></script>
   <style>
     body{font-family:'Segoe UI',Arial,sans-serif;}
     .gradient-cosmos{background:linear-gradient(135deg,#4f46e5,#7c3aed);}
@@ -110,6 +112,39 @@ function adminLoginPage(error = ''): string {
 }
 
 const app = new Hono<{ Bindings: Bindings }>()
+
+// ── Security Headers Middleware ───────────────────────────────────────────────
+app.use('*', async (c, next) => {
+  await next()
+  // Prevent clickjacking
+  c.res.headers.set('X-Frame-Options', 'SAMEORIGIN')
+  // Prevent MIME sniffing
+  c.res.headers.set('X-Content-Type-Options', 'nosniff')
+  // XSS protection (legacy browsers)
+  c.res.headers.set('X-XSS-Protection', '1; mode=block')
+  // Referrer policy
+  c.res.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
+  // Permissions policy
+  c.res.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
+  // HSTS (force HTTPS for 1 year with subdomains)
+  c.res.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload')
+  // Cross-Origin Opener Policy (isolates browsing context)
+  c.res.headers.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups')
+  // Cross-Origin Resource Policy
+  c.res.headers.set('Cross-Origin-Resource-Policy', 'same-origin')
+  // Content Security Policy — allows CDN scripts + Google Fonts + FA
+  c.res.headers.set('Content-Security-Policy',
+    "default-src 'self'; " +
+    "script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " +
+    "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com data:; " +
+    "img-src 'self' https: data:; " +
+    "connect-src 'self'; " +
+    "frame-ancestors 'self'; " +
+    "form-action 'self'; " +
+    "base-uri 'self'"
+  )
+})
 
 // ── OAuth Routes (Google + LinkedIn) ─────────────────────────────────────────
 app.route('/', authRoutes)
@@ -196,8 +231,10 @@ function adminProfilePage(profile: any, msg = '', msgType = 'success', step = 'f
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Admin Profile — CosmosIQ</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/></noscript>
+  <script>window.tailwind={config:{}}</script>
+  <script src="https://cdn.tailwindcss.com" defer></script>
   <style>
     body { font-family:'Segoe UI',Arial,sans-serif; }
     .bg-cosmos { background: linear-gradient(160deg,#0f0c29 0%,#302b63 50%,#24243e 100%); }

@@ -29,7 +29,7 @@ export function homePage(): string {
         <span class="font-bold text-cosmos-600 text-sm">${job.salary}</span>
         <span class="badge bg-green-50 text-green-600 border border-green-200">${job.type}</span>
       </div>
-      <a href="/jobs" class="mt-3 block w-full text-center py-2 rounded-xl border border-cosmos-200 text-cosmos-600 text-sm font-semibold hover:bg-cosmos-600 hover:text-white transition">Apply Now</a>
+      <a href="/jobs" class="mt-3 block w-full text-center py-2 rounded-xl border border-cosmos-200 text-cosmos-600 text-sm font-semibold hover:bg-cosmos-600 hover:text-white transition" aria-label="Apply for ${job.title} at ${job.company}">Apply Now</a>
     </div>
   `).join('')
 
@@ -78,9 +78,9 @@ export function homePage(): string {
   <!-- Animated background particles -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
     <!-- Glowing orbs -->
-    <div class="absolute" style="top:-80px;left:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,0.25) 0%,transparent 70%);animation:pulse-slow 6s ease-in-out infinite;"></div>
-    <div class="absolute" style="bottom:-100px;right:-100px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,0.2) 0%,transparent 70%);animation:pulse-slow 8s ease-in-out infinite reverse;"></div>
-    <div class="absolute" style="top:40%;left:60%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.15) 0%,transparent 70%);animation:pulse-slow 7s ease-in-out infinite;"></div>
+    <div class="absolute" style="top:-80px;left:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,0.25) 0%,transparent 70%);animation:pulse-slow 6s ease-in-out infinite;will-change:opacity;"></div>
+    <div class="absolute" style="bottom:-100px;right:-100px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,0.2) 0%,transparent 70%);animation:pulse-slow 8s ease-in-out infinite reverse;will-change:opacity;"></div>
+    <div class="absolute" style="top:40%;left:60%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.15) 0%,transparent 70%);animation:pulse-slow 7s ease-in-out infinite;will-change:opacity;"></div>
 
     <!-- Grid pattern -->
     <div class="absolute inset-0 opacity-5" style="background-image:linear-gradient(rgba(255,255,255,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.1) 1px,transparent 1px);background-size:60px 60px;"></div>
@@ -94,10 +94,10 @@ export function homePage(): string {
   </div>
 
   <style>
-    @keyframes pulse-slow { 0%,100%{transform:scale(1);opacity:.8} 50%{transform:scale(1.1);opacity:1} }
+    @keyframes pulse-slow { 0%,100%{opacity:.7} 50%{opacity:1} }
     @keyframes float1 { 0%,100%{transform:translateY(0px) translateX(0px)} 33%{transform:translateY(-18px) translateX(8px)} 66%{transform:translateY(8px) translateX(-5px)} }
     @keyframes float2 { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-24px)} }
-    @keyframes float3 { 0%,100%{transform:translateY(0px) rotate(0deg)} 50%{transform:translateY(-16px) rotate(180deg)} }
+    @keyframes float3 { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-16px)} }
     @keyframes shimmer { 0%{background-position:-200% center} 100%{background-position:200% center} }
     @keyframes countUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
     @keyframes slideInLeft { from{opacity:0;transform:translateX(-30px)} to{opacity:1;transform:translateX(0)} }
@@ -140,21 +140,23 @@ export function homePage(): string {
         </p>
 
         <!-- Search Bar -->
-        <div class="search-bar rounded-2xl p-1.5 shadow-2xl mb-5">
+        <form role="search" action="/jobs" method="get" class="search-bar rounded-2xl p-1.5 shadow-2xl mb-5" aria-label="Search jobs">
           <div class="flex flex-col sm:flex-row gap-1.5">
             <div class="flex-1 flex items-center gap-2 px-4 py-3">
-              <i class="fas fa-search text-indigo-500 text-sm flex-shrink-0"></i>
-              <input type="text" id="searchJob" placeholder="Job title, skill or company..." class="w-full text-gray-800 text-sm outline-none font-medium placeholder-gray-400 bg-transparent"/>
+              <label for="searchJob" class="sr-only">Job title, skill or company</label>
+              <span aria-hidden="true" class="fas fa-search text-indigo-500 text-sm flex-shrink-0"></span>
+              <input type="text" id="searchJob" name="q" placeholder="Job title, skill or company..." class="w-full text-gray-800 text-sm outline-none font-medium placeholder-gray-400 bg-transparent" aria-label="Search by job title, skill or company"/>
             </div>
             <div class="flex items-center gap-2 px-4 py-3 border-t sm:border-t-0 sm:border-l border-gray-100 sm:w-40">
-              <i class="fas fa-map-marker-alt text-indigo-500 text-sm flex-shrink-0"></i>
-              <input type="text" id="searchLocation" placeholder="City / Remote" class="w-full text-gray-800 text-sm outline-none font-medium placeholder-gray-400 bg-transparent"/>
+              <label for="searchLocation" class="sr-only">Location or Remote</label>
+              <span aria-hidden="true" class="fas fa-map-marker-alt text-indigo-500 text-sm flex-shrink-0"></span>
+              <input type="text" id="searchLocation" name="location" placeholder="City / Remote" class="w-full text-gray-800 text-sm outline-none font-medium placeholder-gray-400 bg-transparent" aria-label="Filter by city or remote"/>
             </div>
-            <button onclick="window.location='/jobs'" class="px-6 py-3 rounded-xl font-bold text-sm text-white transition whitespace-nowrap" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">
-              <i class="fas fa-bolt mr-1.5"></i>Find Jobs
+            <button type="submit" class="px-6 py-3 rounded-xl font-bold text-sm text-white transition whitespace-nowrap" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);" aria-label="Find jobs matching your search">
+              <span aria-hidden="true" class="fas fa-bolt mr-1.5"></span>Find Jobs
             </button>
           </div>
-        </div>
+        </form>
 
         <!-- Trending tags -->
         <div class="flex flex-wrap gap-2 mb-8">
@@ -206,7 +208,7 @@ export function homePage(): string {
               <span class="text-xs font-bold text-green-400 flex-shrink-0">${j.match}</span>
             </div>`).join('')}
           </div>
-          <button class="mt-3 w-full py-2 rounded-xl text-xs font-bold text-white" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">View All Matches →</button>
+          <a href="/jobs" class="mt-3 block w-full py-2 rounded-xl text-xs font-bold text-white text-center" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);" aria-label="View all AI-matched jobs">View All Matches →</a>
         </div>
 
         <!-- Stats Card -->
@@ -459,12 +461,13 @@ export function homePage(): string {
     <!-- H2 — Newsletter / career advice -->
     <h2 class="text-3xl font-black text-gray-900 mb-3">Get Free Weekly Career Tips &amp; Job Alerts</h2>
     <p class="text-gray-500 mb-8">Get weekly curated job picks, career tips, and industry insights delivered straight to your inbox.</p>
-    <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-      <input type="email" placeholder="Enter your email address" class="flex-1 px-5 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-cosmos-300 focus:border-cosmos-400 transition"/>
-      <button onclick="alert('Thank you for subscribing! 🎉')" class="gradient-cosmos text-white px-6 py-3 rounded-xl font-bold text-sm hover:opacity-90 transition whitespace-nowrap">
+    <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="alert('Thank you for subscribing! 🎉');return false;" aria-label="Newsletter subscription">
+      <label for="newsletterEmail" class="sr-only">Your email address</label>
+      <input type="email" id="newsletterEmail" name="email" placeholder="Enter your email address" class="flex-1 px-5 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-cosmos-300 focus:border-cosmos-400 transition" required aria-label="Email address for newsletter"/>
+      <button type="submit" class="gradient-cosmos text-white px-6 py-3 rounded-xl font-bold text-sm hover:opacity-90 transition whitespace-nowrap" aria-label="Subscribe to free weekly job alerts">
         Subscribe Free
       </button>
-    </div>
+    </form>
     <p class="text-gray-400 text-xs mt-3">No spam. Unsubscribe anytime. Join 200,000+ subscribers.</p>
   </div>
 </section>
