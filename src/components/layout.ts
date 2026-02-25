@@ -242,14 +242,6 @@ export const layout = (
     .fa-envelope::before{content:"✉"}
     .fa-phone::before{content:"📞"}
   </style>
-
-  <!-- ═══ TAILWIND CONFIG (must run before CDN parse) ══════════════════════ -->
-  <script>
-    window.tailwind={config:{theme:{extend:{colors:{cosmos:{50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca',800:'#3730a3',900:'#312e81'}},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}}
-  </script>
-
-  <!-- ═══ TAILWIND CDN — deferred so it NEVER blocks rendering ════════════ -->
-  <script src="https://cdn.tailwindcss.com" defer></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
@@ -408,6 +400,9 @@ ${body}
   </div>
 </footer>
 
+  <!-- Tailwind config + CDN at end of body: HTML renders first, then Tailwind styles apply instantly -->
+  <script>window.tailwind={config:{theme:{extend:{colors:{cosmos:{50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca',800:'#3730a3',900:'#312e81'}},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}}</script>
+  <script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>`;
 }
