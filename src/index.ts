@@ -1,5 +1,5 @@
 import { Hono } from 'hono'
-import { JOBS } from './data/index'
+import { JOBS, BLOG_POSTS, JOB_CATEGORIES } from './data/index'
 import { authRoutes } from './routes/oauth'
 import { otpRoutes } from './routes/email-otp'
 import { emailApiRoutes } from './routes/email-api'
@@ -658,6 +658,203 @@ app.get('/privacy',   (c) => c.html(privacyPage()))
 // ── Redirect aliases ──────────────────────────────────────────────────────────
 app.get('/register', (c) => c.redirect('/signup'))
 app.get('/post-job', (c) => c.redirect('/employer'))
+
+// ── Sitemap XML ───────────────────────────────────────────────────────────────
+app.get('/sitemap.xml', (c) => {
+  const BASE = 'https://cosmosiqcareers.com'
+  const today = new Date().toISOString().split('T')[0]   // e.g. 2026-02-25
+
+  // ── 1. Static public pages ──────────────────────────────────────────────────
+  const staticPages = [
+    { url: '/',          priority: '1.0', changefreq: 'daily'   },
+    { url: '/jobs',      priority: '0.9', changefreq: 'hourly'  },
+    { url: '/companies', priority: '0.8', changefreq: 'weekly'  },
+    { url: '/about',     priority: '0.7', changefreq: 'monthly' },
+    { url: '/blog',      priority: '0.8', changefreq: 'weekly'  },
+    { url: '/careers',   priority: '0.7', changefreq: 'monthly' },
+    { url: '/contact',   priority: '0.6', changefreq: 'monthly' },
+    { url: '/terms',     priority: '0.3', changefreq: 'yearly'  },
+    { url: '/privacy',   priority: '0.3', changefreq: 'yearly'  },
+  ]
+
+  // ── 2. Job category filter pages ────────────────────────────────────────────
+  const categories = [
+    'Technology', 'Marketing', 'Finance', 'Design',
+    'Healthcare', 'Education', 'Human Resources', 'Operations',
+    'Data Science', 'Management',
+  ]
+  const categoryPages = categories.map(cat => ({
+    url: `/jobs?category=${encodeURIComponent(cat)}`,
+    priority: '0.8',
+    changefreq: 'daily',
+  }))
+
+  // ── 3. Location filter pages (major Indian cities) ──────────────────────────
+  const locations = [
+    'Bangalore', 'Mumbai', 'Delhi', 'Hyderabad', 'Pune',
+    'Chennai', 'Kolkata', 'Ahmedabad', 'Noida', 'Gurugram', 'Remote',
+  ]
+  const locationPages = locations.map(loc => ({
+    url: `/jobs?location=${encodeURIComponent(loc)}`,
+    priority: '0.7',
+    changefreq: 'daily',
+  }))
+
+  // ── 4. Job type filter pages ────────────────────────────────────────────────
+  const jobTypes = ['Full Time', 'Remote', 'Part Time', 'Contract', 'Internship']
+  const typePages = jobTypes.map(type => ({
+    url: `/jobs?type=${encodeURIComponent(type)}`,
+    priority: '0.7',
+    changefreq: 'daily',
+  }))
+
+  // ── 5. Individual job listing pages ─────────────────────────────────────────
+  const jobPages = JOBS.map(job => ({
+    url: `/jobs/${job.id}/${job.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+    priority: '0.6',
+    changefreq: 'weekly',
+  }))
+
+  // ── 6. Blog post pages ───────────────────────────────────────────────────────
+  const blogPages = [
+    { slug: 'ats-friendly-resume-2026',           date: '2026-02-18' },
+    { slug: 'top-10-skills-employers-2026',       date: '2026-02-15' },
+    { slug: 'behavioral-interviews-star-method',  date: '2026-02-12' },
+    { slug: 'remote-work-2026-opportunities',     date: '2026-02-10' },
+    { slug: 'salary-negotiation-guide',           date: '2026-02-08' },
+    { slug: 'linkedin-profile-tips-recruiters',   date: '2026-02-05' },
+  ].map(b => ({
+    url: `/blog/${b.slug}`,
+    priority: '0.6',
+    changefreq: 'monthly',
+    lastmod: b.date,
+  }))
+
+  // ── 7. Popular keyword search pages ─────────────────────────────────────────
+  const popularSearches = [
+    'React Developer', 'Data Scientist', 'Product Manager',
+    'DevOps Engineer', 'UX Designer', 'Python Developer',
+    'Digital Marketing', 'Business Analyst', 'Java Developer',
+    'Machine Learning Engineer', 'HR Manager', 'Sales Manager',
+    'Frontend Developer', 'Backend Developer', 'Full Stack Developer',
+    'Cloud Architect', 'Cybersecurity Analyst', 'Content Writer',
+    'Graphic Designer', 'Financial Analyst',
+  ]
+  const searchPages = popularSearches.map(q => ({
+    url: `/jobs?q=${encodeURIComponent(q)}`,
+    priority: '0.65',
+    changefreq: 'daily',
+  }))
+
+  // ── Build XML ────────────────────────────────────────────────────────────────
+  const allPages = [
+    ...staticPages,
+    ...categoryPages,
+    ...locationPages,
+    ...typePages,
+    ...jobPages,
+    ...blogPages,
+    ...searchPages,
+  ]
+
+  const urlEntries = allPages.map(p => `
+  <url>
+    <loc>${BASE}${p.url}</loc>
+    <lastmod>${(p as any).lastmod || today}</lastmod>
+    <changefreq>${p.changefreq}</changefreq>
+    <priority>${p.priority}</priority>
+  </url>`).join('')
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+    http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+${urlEntries}
+</urlset>`
+
+  return c.body(xml, 200, {
+    'Content-Type': 'application/xml; charset=utf-8',
+    'Cache-Control': 'public, max-age=3600',
+  })
+})
+
+// ── Robots.txt ────────────────────────────────────────────────────────────────
+app.get('/robots.txt', (c) => {
+  const BASE = 'https://cosmosiqcareers.com'
+  const robots = `# CosmosIQ Careers — robots.txt
+# Generated: 2026-02-25
+# Site: ${BASE}
+
+User-agent: *
+Allow: /
+
+# Public pages — always crawl
+Allow: /jobs
+Allow: /jobs?*
+Allow: /companies
+Allow: /about
+Allow: /blog
+Allow: /blog/*
+Allow: /careers
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+Allow: /sitemap.xml
+
+# Block admin & private pages
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /dashboard
+Disallow: /employer
+Disallow: /login
+Disallow: /signup
+Disallow: /forgot-password
+Disallow: /otp-verify
+Disallow: /api/
+Disallow: /auth/
+
+# Block internal redirects
+Disallow: /register
+Disallow: /post-job
+
+# Crawl delay (be polite to servers)
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: ${BASE}/sitemap.xml
+
+# ── Specific bot rules ────────────────────────────────────────────────────────
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+`
+
+  return c.body(robots, 200, {
+    'Content-Type': 'text/plain; charset=utf-8',
+    'Cache-Control': 'public, max-age=86400',
+  })
+})
 
 // ── API: Jobs ─────────────────────────────────────────────────────────────────
 app.get('/api/jobs', (c) => {
