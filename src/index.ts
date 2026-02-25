@@ -132,14 +132,14 @@ app.use('*', async (c, next) => {
   c.res.headers.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups')
   // Cross-Origin Resource Policy
   c.res.headers.set('Cross-Origin-Resource-Policy', 'same-origin')
-  // Content Security Policy — allows CDN scripts + Google Fonts + FA
+  // Content Security Policy — allows CDN scripts + Google Fonts + FA + Cloudflare Analytics
   c.res.headers.set('Content-Security-Policy',
     "default-src 'self'; " +
-    "script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " +
+    "script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://static.cloudflareinsights.com; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " +
     "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com data:; " +
     "img-src 'self' https: data:; " +
-    "connect-src 'self'; " +
+    "connect-src 'self' https://cloudflareinsights.com; " +
     "frame-ancestors 'self'; " +
     "form-action 'self'; " +
     "base-uri 'self'"
