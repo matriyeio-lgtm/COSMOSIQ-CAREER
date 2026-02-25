@@ -9,7 +9,8 @@ export function aboutPage(): string {
 <div class="gradient-hero text-white py-20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <span class="inline-block bg-white/10 text-white/80 text-xs font-medium px-4 py-2 rounded-full border border-white/20 mb-5">🌌 Our Story</span>
-    <h1 class="text-4xl md:text-5xl font-black mb-5">Transforming How India Finds Work</h1>
+    <!-- H1: About page — brand + mission keyword -->
+    <h1 class="text-4xl md:text-5xl font-black mb-5">Transforming How India Finds Work — About CosmosIQ</h1>
     <p class="text-white/70 text-lg max-w-2xl mx-auto">CosmosIQ Talent Solutions is redefining career discovery with the power of artificial intelligence and human insight.</p>
   </div>
 </div>
@@ -20,12 +21,14 @@ export function aboutPage(): string {
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
     <div class="bg-cosmos-50 border border-cosmos-100 rounded-3xl p-8">
       <div class="text-4xl mb-4">🎯</div>
-      <h2 class="text-2xl font-black text-gray-900 mb-3">Our Mission</h2>
+      <!-- H2: Mission statement -->
+      <h2 class="text-2xl font-black text-gray-900 mb-3">Our Mission — Democratising Jobs in India</h2>
       <p class="text-gray-600 leading-relaxed">To democratize access to quality employment opportunities across India — empowering every professional, from freshers to C-suite executives, to discover roles that align with their skills, values, and ambitions using the precision of AI.</p>
     </div>
     <div class="bg-purple-50 border border-purple-100 rounded-3xl p-8">
       <div class="text-4xl mb-4">🔭</div>
-      <h2 class="text-2xl font-black text-gray-900 mb-3">Our Vision</h2>
+      <!-- H2: Vision statement -->
+      <h2 class="text-2xl font-black text-gray-900 mb-3">Our Vision — India's Leading AI Talent Ecosystem</h2>
       <p class="text-gray-600 leading-relaxed">To become the most trusted AI-powered talent ecosystem in Asia — where every company finds the right person and every person finds the right opportunity. A world where talent knows no boundaries.</p>
     </div>
   </div>
@@ -128,7 +131,12 @@ export function aboutPage(): string {
   </div>
 </div>
 `
-  return layout('About Us', body, 'about')
+  return layout('About Us', body, 'about', {
+    title: 'About CosmosIQ Careers | AI-Powered Job Portal by Matriye Group, Pune',
+    description: 'Learn about CosmosIQ Careers — India\'s #1 AI-powered job portal founded by Kumar Sanjeev, CEO Matriye Group. Our mission: democratise employment across India using AI-matching for freshers to executives.',
+    keywords: 'about cosmosiq, cosmosiq careers about us, matriye group pune, kumar sanjeev CEO, AI job portal india, job portal company pune, cosmosiq talent solutions',
+    canonical: 'https://cosmosiqcareers.com/about'
+  })
 }
 
 // ── BLOG PAGE ────────────────────────────────────────────────────────────────
@@ -139,8 +147,9 @@ export function blogPage(): string {
 <div class="gradient-hero text-white py-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <span class="inline-block bg-white/10 text-white/80 text-xs font-medium px-4 py-2 rounded-full border border-white/20 mb-5">📚 Knowledge Hub</span>
-    <h1 class="text-4xl font-black mb-3">Career Insights & Advice</h1>
-    <p class="text-white/70 max-w-xl mx-auto">Expert articles on careers, interviews, skill development, and hiring trends</p>
+    <!-- H1: Blog page -->
+    <h1 class="text-4xl font-black mb-3">Career Advice, Job Tips &amp; Industry Insights</h1>
+    <p class="text-white/70 max-w-xl mx-auto">Expert articles on career growth, interview preparation, resume writing, and India hiring trends</p>
   </div>
 </div>
 
@@ -195,7 +204,8 @@ export function blogPage(): string {
 
   <!-- Newsletter CTA -->
   <div class="bg-cosmos-50 border border-cosmos-100 rounded-3xl p-8 mt-12 text-center">
-    <h3 class="text-2xl font-black text-gray-900 mb-2">Get Weekly Career Insights</h3>
+    <!-- H2: Blog newsletter -->
+    <h3 class="text-2xl font-black text-gray-900 mb-2">Get Free Weekly Job Alerts &amp; Career Tips</h3>
     <p class="text-gray-500 mb-5">Join 200,000+ professionals getting expert career advice every week.</p>
     <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
       <input type="email" placeholder="your@email.com" class="flex-1 px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-cosmos-300"/>
@@ -204,7 +214,12 @@ export function blogPage(): string {
   </div>
 </div>
 `
-  return layout('Blog — Career Insights', body, 'blog')
+  return layout('Blog — Career Insights', body, 'blog', {
+    title: 'Career Advice Blog — Job Tips, Resume & Interview Guide India | CosmosIQ',
+    description: 'Free career advice for Indian job seekers. Expert tips on resume writing, interview preparation, salary negotiation, job search strategies and industry trends. Updated weekly by CosmosIQ experts.',
+    keywords: 'career advice india, job tips india, resume writing tips, interview preparation india, salary negotiation, career growth india, job search tips 2025, freshers career guide india',
+    canonical: 'https://cosmosiqcareers.com/blog'
+  })
 }
 
 // ── CAREERS PAGE ─────────────────────────────────────────────────────────────
@@ -212,8 +227,9 @@ export function careersPage(): string {
   const body = `
 <div class="gradient-hero text-white py-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h1 class="text-4xl font-black mb-3">Hiring Solutions for Modern Teams</h1>
-    <p class="text-white/70 text-lg max-w-xl mx-auto">Partner with CosmosIQ to access India's most talented professionals, powered by AI matching.</p>
+    <!-- H1: Careers / Hiring solutions page -->
+    <h1 class="text-4xl font-black mb-3">Hire Top Talent in India — AI-Powered Recruitment Solutions</h1>
+    <p class="text-white/70 text-lg max-w-xl mx-auto">Partner with CosmosIQ to find India's best professionals in IT, finance, marketing & more. 94% match accuracy, 3x faster hiring.</p>
     <a href="/employer" class="inline-flex items-center gap-2 bg-white text-cosmos-700 px-6 py-3 rounded-xl font-bold mt-6 hover:bg-gray-100 transition">
       Start Hiring Free <i class="fas fa-arrow-right"></i>
     </a>
@@ -223,7 +239,8 @@ export function careersPage(): string {
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
   <!-- Why Partner -->
   <div class="text-center mb-12">
-    <h2 class="text-3xl font-black text-gray-900 mb-3">Why Top Companies Choose CosmosIQ</h2>
+    <!-- H2: Why companies choose CosmosIQ -->
+    <h2 class="text-3xl font-black text-gray-900 mb-3">Why 12,000+ Companies Choose CosmosIQ to Hire in India</h2>
   </div>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
     ${[
@@ -288,7 +305,12 @@ export function careersPage(): string {
   </div>
 </div>
 `
-  return layout('Hiring Solutions', body, '')
+  return layout('Hiring Solutions', body, '', {
+    title: 'Hire Top Talent in India — AI Recruitment Solutions | CosmosIQ Careers',
+    description: 'Post jobs and hire top talent in India with CosmosIQ Careers. AI-powered candidate matching, pre-screened profiles, 3x faster hiring. Access 5M+ job seekers across IT, finance, marketing, engineering & more.',
+    keywords: 'hire talent india, post job india, recruitment solutions india, AI recruitment platform, bulk hiring india, employer job portal india, IT recruitment india, hire software developers india',
+    canonical: 'https://cosmosiqcareers.com/careers'
+  })
 }
 
 // ── CONTACT PAGE ─────────────────────────────────────────────────────────────
@@ -296,8 +318,9 @@ export function contactPage(): string {
   const body = `
 <div class="gradient-hero text-white py-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h1 class="text-4xl font-black mb-3">Get in Touch</h1>
-    <p class="text-white/70">Our team is ready to help you within 24 hours</p>
+    <!-- H1: Contact page -->
+    <h1 class="text-4xl font-black mb-3">Contact CosmosIQ Careers — We're Here to Help</h1>
+    <p class="text-white/70">Our support team responds within 24 hours. Reach us via phone, email or live chat.</p>
   </div>
 </div>
 
@@ -389,7 +412,12 @@ function handleContact(e) {
 }
 </script>
 `
-  return layout('Contact Us', body, 'contact')
+  return layout('Contact Us', body, 'contact', {
+    title: 'Contact CosmosIQ Careers | Support, Helpdesk & Business Enquiries',
+    description: 'Contact CosmosIQ Careers for job seeker support, employer enquiries, partnership requests or technical help. Pune, Maharashtra. Phone: +91 89564 18531. Email: hello@cosmosiqcareers.com.',
+    keywords: 'contact cosmosiq, cosmosiq support, cosmosiq phone number, cosmosiq careers contact, job portal support india, employer support cosmosiq, cosmosiq helpdesk',
+    canonical: 'https://cosmosiqcareers.com/contact'
+  })
 }
 
 // ── COMPANIES PAGE ────────────────────────────────────────────────────────────
@@ -408,8 +436,9 @@ export function companiesPage(): string {
   const body = `
 <div class="gradient-hero text-white py-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h1 class="text-4xl font-black mb-3">Top Companies Hiring Now</h1>
-    <p class="text-white/70">Explore 12,000+ verified companies and find your next employer</p>
+    <!-- H1: Companies page -->
+    <h1 class="text-4xl font-black mb-3">Top Companies Hiring in India — Browse &amp; Apply</h1>
+    <p class="text-white/70">Explore 12,000+ verified companies across IT, fintech, EdTech, healthcare & more. Find your dream employer.</p>
   </div>
 </div>
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -432,7 +461,12 @@ export function companiesPage(): string {
   </div>
 </div>
 `
-  return layout('Top Companies', body, 'companies')
+  return layout('Top Companies', body, 'companies', {
+    title: 'Top Companies Hiring in India 2025 — Browse Employer Profiles | CosmosIQ',
+    description: 'Browse 12,000+ top companies hiring in India. Explore employer profiles, open jobs, company culture and salaries for Google, Amazon, TCS, Infosys, startups and more. Apply directly on CosmosIQ Careers.',
+    keywords: 'top companies hiring india, employer profiles india, best companies to work india, IT companies hiring 2025, startup jobs india, MNC jobs india, google india jobs, amazon india jobs, tcs jobs, infosys jobs',
+    canonical: 'https://cosmosiqcareers.com/companies'
+  })
 }
 
 // ── TERMS & PRIVACY ──────────────────────────────────────────────────────────
@@ -451,7 +485,8 @@ export function termsPage(): string {
   const body = `
 <div class="gradient-hero text-white py-12">
   <div class="max-w-4xl mx-auto px-4 text-center">
-    <h1 class="text-3xl font-black mb-2">Terms & Conditions</h1>
+    <!-- H1: Terms page -->
+    <h1 class="text-3xl font-black mb-2">Terms &amp; Conditions — CosmosIQ Careers</h1>
     <p class="text-white/70 text-sm">Last Updated: February 25, 2025</p>
   </div>
 </div>
@@ -470,7 +505,13 @@ export function termsPage(): string {
   </div>
 </div>
 `
-  return layout('Terms & Conditions', body, '')
+  return layout('Terms & Conditions', body, '', {
+    title: 'Terms & Conditions | CosmosIQ Careers — Matriye Group',
+    description: 'Read the Terms and Conditions for using CosmosIQ Careers job portal. Covers user eligibility, employer responsibilities, content policy, intellectual property, and dispute resolution for India.',
+    keywords: 'cosmosiq terms and conditions, job portal terms of service india, cosmosiq careers legal',
+    canonical: 'https://cosmosiqcareers.com/terms',
+    noIndex: false
+  })
 }
 
 export function privacyPage(): string {
@@ -506,5 +547,11 @@ export function privacyPage(): string {
   </div>
 </div>
 `
-  return layout('Privacy Policy', body, '')
+  return layout('Privacy Policy', body, '', {
+    title: 'Privacy Policy | CosmosIQ Careers — Data Protection India (PDPB 2023)',
+    description: 'CosmosIQ Careers Privacy Policy. How we collect, use and protect your data under India\'s PDPB 2023. Your rights, cookie policy, data retention and security practices.',
+    keywords: 'cosmosiq privacy policy, job portal privacy india, PDPB 2023 compliance, data protection job portal',
+    canonical: 'https://cosmosiqcareers.com/privacy',
+    noIndex: false
+  })
 }

@@ -231,5 +231,10 @@ export function adminDashboard(): string {
   </div>
 </div>
 `
-  return layout('Admin Portal', body, '')
+  return layout('Admin Portal', body, '', {
+    title: 'Admin Portal | CosmosIQ Careers',
+    description: 'CosmosIQ Admin Control Panel — internal use only.',
+    canonical: 'https://cosmosiqcareers.com/admin',
+    noIndex: true
+  })
 }

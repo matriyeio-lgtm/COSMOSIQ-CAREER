@@ -52,8 +52,9 @@ export function jobsPage(query = '', location = '', category = '', type = ''): s
   <!-- Page Header -->
   <div class="gradient-hero text-white py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-black mb-2">Browse Jobs</h1>
-      <p class="text-white/70">Discover ${JOBS.length.toLocaleString()}+ opportunities across all industries</p>
+      <!-- H1 — Search context aware -->
+      <h1 class="text-3xl font-black mb-2">${query ? `${query} Jobs in India` : 'Browse All Jobs in India'}</h1>
+      <p class="text-white/70">Search ${JOBS.length.toLocaleString()}+ verified jobs across IT, finance, marketing, healthcare &amp; engineering</p>
       
       <!-- Search Bar -->
       <div class="glass rounded-2xl p-2 mt-6 max-w-3xl">
@@ -73,7 +74,8 @@ export function jobsPage(query = '', location = '', category = '', type = ''): s
       <aside class="w-full lg:w-72 flex-shrink-0">
         <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sticky top-20">
           <h3 class="font-bold text-gray-900 mb-4 flex items-center gap-2">
-            <i class="fas fa-sliders-h text-cosmos-500"></i> Filter Jobs
+            <!-- H3: Filter sidebar heading -->
+            <i class="fas fa-sliders-h text-cosmos-500"></i> Filter Jobs by Category &amp; Type
           </h3>
           
           <!-- Job Type -->
@@ -161,5 +163,19 @@ export function jobsPage(query = '', location = '', category = '', type = ''): s
   </div>
 </div>
 `
-  return layout('Browse Jobs', body, 'jobs')
+  // Dynamic SEO for job search pages
+  const pageTitle = query
+    ? `${query} Jobs in India 2025 — Search & Apply | CosmosIQ Careers`
+    : 'Browse Jobs in India 2025 — IT, Finance, Marketing & More | CosmosIQ Careers'
+  const pageDesc = query
+    ? `Find the best ${query} jobs in India. ${filtered.length} verified openings at top companies. Apply now on CosmosIQ Careers — AI-powered job portal.`
+    : `Search 50,000+ jobs in India across IT, software, finance, marketing, healthcare & engineering. Filter by location, salary & job type. AI-powered matching on CosmosIQ Careers.`
+  const pageKeywords = `${query ? query + ' jobs india, ' : ''}jobs in india 2025, IT jobs india, software developer jobs, finance jobs india, marketing jobs, remote jobs india, freshers jobs, experienced jobs india, job search india, apply online jobs`
+
+  return layout('Browse Jobs', body, 'jobs', {
+    title: pageTitle,
+    description: pageDesc,
+    keywords: pageKeywords,
+    canonical: 'https://cosmosiqcareers.com/jobs'
+  })
 }

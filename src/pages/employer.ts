@@ -255,5 +255,10 @@ function handleJobPost(e) {
 }
 </script>
 `
-  return layout('Employer Dashboard', body, '')
+  return layout('Employer Dashboard', body, '', {
+    title: 'Employer Dashboard — Post Jobs & Manage Applicants | CosmosIQ Careers',
+    description: 'Post jobs, review applicants, track hiring pipeline, and manage your employer profile on CosmosIQ Careers. AI-powered recruitment dashboard for Indian employers.',
+    canonical: 'https://cosmosiqcareers.com/employer',
+    noIndex: true
+  })
 }

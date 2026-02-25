@@ -1,12 +1,121 @@
 // ─── Shared Layout Shell ────────────────────────────────────────────────────
-export const layout = (title: string, body: string, activePage: string = '') => `<!DOCTYPE html>
+// SEO options: pass seo object for per-page meta title, description, keywords, canonical
+interface SEOOptions {
+  title?:       string   // full <title> override (if not passed, uses `${title} | CosmosIQ Careers`)
+  description?: string
+  keywords?:    string
+  canonical?:   string
+  ogImage?:     string
+  ogType?:      string   // default: website
+  noIndex?:     boolean  // for admin/private pages
+}
+
+export const layout = (
+  title: string,
+  body: string,
+  activePage: string = '',
+  seo: SEOOptions = {}
+) => {
+  const BASE = 'https://cosmosiqcareers.com'
+  const metaTitle       = seo.title       || `${title} | CosmosIQ Careers — AI-Powered Job Portal India`
+  const metaDesc        = seo.description || 'CosmosIQ Careers — India\'s #1 AI-powered job portal. Discover 50,000+ jobs at top companies. Instant OTP login, 1-click apply, AI job matching. Join 2 lakh+ job seekers today.'
+  const metaKeywords    = seo.keywords    || 'jobs in india, job portal india, AI job matching, CosmosIQ careers, employment opportunities, hire talent india, job search 2025, naukri alternative, career portal pune'
+  const canonical       = seo.canonical   || `${BASE}${activePage === 'home' ? '/' : '/' + activePage}`
+  const ogImage         = seo.ogImage     || `${BASE}/static/og-image.png`
+  const ogType          = seo.ogType      || 'website'
+  const robotsContent   = seo.noIndex     ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'
+
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>${title} — CosmosIQ Talent Solutions</title>
-  <meta name="description" content="CosmosIQ Talent Solutions — India's premium AI-powered job portal connecting top talent with world-class employers."/>
-  <meta name="keywords" content="jobs, careers, employment, hiring, job portal, CosmosIQ, talent solutions"/>
+
+  <!-- ═══ PRIMARY SEO META ═══════════════════════════════════════════════════ -->
+  <title>${metaTitle}</title>
+  <meta name="description" content="${metaDesc}"/>
+  <meta name="keywords" content="${metaKeywords}"/>
+  <meta name="robots" content="${robotsContent}"/>
+  <meta name="author" content="CosmosIQ Talent Solutions — Matriye Group, Pune"/>
+  <meta name="copyright" content="© 2025 CosmosIQ Talent Solutions. Matriye Group."/>
+  <meta name="language" content="en-IN"/>
+  <meta name="geo.region" content="IN-MH"/>
+  <meta name="geo.placename" content="Pune, Maharashtra, India"/>
+  <link rel="canonical" href="${canonical}"/>
+
+  <!-- ═══ OPEN GRAPH (Facebook / LinkedIn / WhatsApp) ════════════════════════ -->
+  <meta property="og:type"        content="${ogType}"/>
+  <meta property="og:title"       content="${metaTitle}"/>
+  <meta property="og:description" content="${metaDesc}"/>
+  <meta property="og:url"         content="${canonical}"/>
+  <meta property="og:image"       content="${ogImage}"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name"   content="CosmosIQ Careers"/>
+  <meta property="og:locale"      content="en_IN"/>
+
+  <!-- ═══ TWITTER CARD ═══════════════════════════════════════════════════════ -->
+  <meta name="twitter:card"        content="summary_large_image"/>
+  <meta name="twitter:site"        content="@CosmosIQCareers"/>
+  <meta name="twitter:title"       content="${metaTitle}"/>
+  <meta name="twitter:description" content="${metaDesc}"/>
+  <meta name="twitter:image"       content="${ogImage}"/>
+
+  <!-- ═══ STRUCTURED DATA — Organization + Website ══════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "${BASE}/#organization",
+        "name": "CosmosIQ Talent Solutions",
+        "alternateName": "CosmosIQ Careers",
+        "url": "${BASE}",
+        "logo": "${BASE}/static/logo.png",
+        "description": "India's #1 AI-powered job portal connecting job seekers with top employers.",
+        "foundingDate": "2023",
+        "founder": { "@type": "Person", "name": "Kumar Sanjeev" },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Pune",
+          "addressRegion": "Maharashtra",
+          "addressCountry": "IN"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+91-89564-18531",
+          "contactType": "Customer Support",
+          "email": "hello@cosmosiqcareers.com",
+          "availableLanguage": ["English", "Hindi"]
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/cosmosiq",
+          "https://twitter.com/CosmosIQCareers"
+        ],
+        "parentOrganization": {
+          "@type": "Organization",
+          "name": "Matriye Group",
+          "url": "https://matriye.com"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "${BASE}/#website",
+        "url": "${BASE}",
+        "name": "CosmosIQ Careers",
+        "description": "AI-Powered Job Portal India",
+        "publisher": { "@id": "${BASE}/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": { "@type": "EntryPoint", "urlTemplate": "${BASE}/jobs?q={search_term_string}" },
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌌</text></svg>"/>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css"/>
@@ -199,3 +308,4 @@ ${body}
 
 </body>
 </html>`;
+}

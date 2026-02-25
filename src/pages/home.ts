@@ -127,10 +127,11 @@ export function homePage(): string {
         </div>
 
         <!-- Main Headline -->
-        <h1 class="text-4xl md:text-5xl xl:text-6xl font-black text-white leading-tight mb-5">
-          Launch Your<br/>
-          <span class="shimmer-text">Dream Career</span><br/>
-          <span class="text-white/90">with CosmosIQ</span>
+        <!-- H1 — Primary keyword: AI-powered job portal India -->
+        <h1 class="text-4xl md:text-5xl xl:text-6xl font-black text-white leading-tight mb-5" itemprop="headline">
+          Find Your<br/>
+          <span class="shimmer-text">Dream Job in India</span><br/>
+          <span class="text-white/90">with AI-Powered CosmosIQ</span>
         </h1>
 
         <!-- Subheadline -->
@@ -307,8 +308,9 @@ export function homePage(): string {
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-10">
       <span class="text-cosmos-600 font-semibold text-sm uppercase tracking-widest">Explore by Field</span>
-      <h2 class="text-3xl font-black text-gray-900 mt-2">Browse Job Categories</h2>
-      <p class="text-gray-500 mt-2">Discover thousands of opportunities across every industry</p>
+      <!-- H2 — Secondary keyword: job categories India -->
+      <h2 class="text-3xl font-black text-gray-900 mt-2">Browse Jobs by Category in India</h2>
+      <p class="text-gray-500 mt-2">Discover thousands of IT, finance, marketing, healthcare & engineering jobs across every industry</p>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       ${categoryCards}
@@ -322,7 +324,8 @@ export function homePage(): string {
     <div class="flex items-center justify-between mb-10">
       <div>
         <span class="text-cosmos-600 font-semibold text-sm uppercase tracking-widest">Latest Openings</span>
-        <h2 class="text-3xl font-black text-gray-900 mt-1">Trending Jobs Today</h2>
+        <!-- H2 — Secondary keyword: trending jobs 2025 -->
+        <h2 class="text-3xl font-black text-gray-900 mt-1">Trending Jobs in India 2025</h2>
       </div>
       <a href="/jobs" class="hidden md:flex items-center gap-2 text-cosmos-600 font-semibold text-sm hover:underline">
         View All Jobs <i class="fas fa-arrow-right"></i>
@@ -344,7 +347,8 @@ export function homePage(): string {
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <span class="text-cosmos-600 font-semibold text-sm uppercase tracking-widest">Simple Process</span>
-      <h2 class="text-3xl font-black text-gray-900 mt-2">Get Hired in 3 Easy Steps</h2>
+      <!-- H2 — How to get hired -->
+      <h2 class="text-3xl font-black text-gray-900 mt-2">How to Get Hired Fast — 3 Easy Steps</h2>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       ${[
@@ -376,7 +380,8 @@ export function homePage(): string {
     <div class="flex items-center justify-between mb-10">
       <div>
         <span class="text-cosmos-600 font-semibold text-sm uppercase tracking-widest">Top Hirers</span>
-        <h2 class="text-3xl font-black text-gray-900 mt-1">Featured Employers</h2>
+        <!-- H2 — Top companies hiring India -->
+        <h2 class="text-3xl font-black text-gray-900 mt-1">Top Companies Hiring in India</h2>
       </div>
       <a href="/companies" class="hidden md:flex items-center gap-2 text-cosmos-600 font-semibold text-sm hover:underline">
         View All Companies <i class="fas fa-arrow-right"></i>
@@ -399,7 +404,8 @@ export function homePage(): string {
           <span class="inline-flex items-center gap-2 bg-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-full mb-4">
             <i class="fas fa-brain"></i> Powered by AI
           </span>
-          <h2 class="text-3xl font-black mb-4">Smart Job Matching That Actually Works</h2>
+          <!-- H2 — AI job matching feature -->
+          <h2 class="text-3xl font-black mb-4">AI-Powered Job Matching — 94% Accuracy</h2>
           <p class="text-white/80 mb-6 leading-relaxed">Our AI engine analyzes your resume, skills, experience, and preferences to deliver hyper-personalized job recommendations with a 94% match accuracy rate.</p>
           <div class="space-y-3">
             ${[
@@ -437,7 +443,8 @@ export function homePage(): string {
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-10">
       <span class="text-cosmos-600 font-semibold text-sm uppercase tracking-widest">Success Stories</span>
-      <h2 class="text-3xl font-black text-gray-900 mt-2">What Our Community Says</h2>
+      <!-- H2 — Social proof -->
+      <h2 class="text-3xl font-black text-gray-900 mt-2">What Job Seekers Say About CosmosIQ</h2>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
       ${testimonialCards}
@@ -449,7 +456,8 @@ export function homePage(): string {
 <section class="py-16 bg-gray-50">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
     <div class="text-4xl mb-4">📬</div>
-    <h2 class="text-3xl font-black text-gray-900 mb-3">Stay Ahead of the Curve</h2>
+    <!-- H2 — Newsletter / career advice -->
+    <h2 class="text-3xl font-black text-gray-900 mb-3">Get Free Weekly Career Tips &amp; Job Alerts</h2>
     <p class="text-gray-500 mb-8">Get weekly curated job picks, career tips, and industry insights delivered straight to your inbox.</p>
     <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
       <input type="email" placeholder="Enter your email address" class="flex-1 px-5 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-cosmos-300 focus:border-cosmos-400 transition"/>
@@ -487,5 +495,11 @@ export function homePage(): string {
 
 `
 
-  return layout('Home – Find Your Dream Career', body, 'home')
+  return layout('Home', body, 'home', {
+    title: 'CosmosIQ Careers — #1 AI-Powered Job Portal India | Find Jobs & Hire Talent',
+    description: 'CosmosIQ Careers is India\'s leading AI-powered job portal. Search 50,000+ jobs in IT, finance, marketing & more. AI job matching, 1-click apply, instant OTP login. Join 2 lakh+ job seekers. Powered by Matriye Group, Pune.',
+    keywords: 'job portal india, jobs in india 2025, AI job matching, find jobs online india, top companies hiring india, naukri alternative, cosmosiq careers, job search pune, IT jobs india, freshers jobs india, remote jobs india, work from home jobs india',
+    canonical: 'https://cosmosiqcareers.com/',
+    ogType: 'website'
+  })
 }

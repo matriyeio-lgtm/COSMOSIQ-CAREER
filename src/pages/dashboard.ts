@@ -236,5 +236,10 @@ export function seekerDashboard(): string {
   </div>
 </div>
 `
-  return layout('My Dashboard', body, '')
+  return layout('My Dashboard', body, '', {
+    title: 'Job Seeker Dashboard | CosmosIQ Careers',
+    description: 'Manage your job applications, saved jobs, resume builder, skill assessments and job alerts from your CosmosIQ Careers dashboard.',
+    canonical: 'https://cosmosiqcareers.com/dashboard',
+    noIndex: true
+  })
 }

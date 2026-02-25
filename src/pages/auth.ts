@@ -305,7 +305,13 @@ function hideError(id) {
 }
 </script>
 `
-  return layout('Login', body, '')
+  return layout('Login', body, '', {
+    title: 'Login to CosmosIQ Careers | OTP & Google Sign In India',
+    description: 'Sign in to CosmosIQ Careers with secure OTP email login or Google/LinkedIn. Access your job dashboard, applications, and saved jobs instantly.',
+    keywords: 'cosmosiq login, job portal login india, sign in cosmosiq, OTP login job portal',
+    canonical: 'https://cosmosiqcareers.com/login',
+    noIndex: true
+  })
 }
 
 export function signupPage(): string {
@@ -620,7 +626,13 @@ function hideSignupError(id) {
 }
 </script>
 `
-  return layout('Sign Up', body, '')
+  return layout('Sign Up', body, '', {
+    title: 'Create Free Account | CosmosIQ Careers — Job Portal India',
+    description: 'Sign up free on CosmosIQ Careers. Create your profile, upload resume, get AI-matched to 50,000+ jobs. Join 2 lakh+ job seekers on India\'s smartest job portal.',
+    keywords: 'sign up cosmosiq, register job portal india, create account cosmosiq careers, free job seeker account india',
+    canonical: 'https://cosmosiqcareers.com/signup',
+    noIndex: true
+  })
 }
 
 export function forgotPasswordPage(): string {
@@ -660,5 +672,10 @@ function handleReset(e) {
 }
 </script>
 `
-  return layout('Forgot Password', body, '')
+  return layout('Forgot Password', body, '', {
+    title: 'Reset Password | CosmosIQ Careers',
+    description: 'Reset your CosmosIQ Careers account password securely via OTP email verification.',
+    canonical: 'https://cosmosiqcareers.com/forgot-password',
+    noIndex: true
+  })
 }
