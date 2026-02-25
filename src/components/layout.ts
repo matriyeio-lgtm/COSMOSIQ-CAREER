@@ -19,7 +19,7 @@ export const layout = (
   const BASE = 'https://cosmosiqcareers.com'
   const metaTitle       = seo.title       || `${title} | CosmosIQ Careers — AI-Powered Job Portal India`
   const metaDesc        = seo.description || 'CosmosIQ Careers — India\'s #1 AI-powered job portal. Discover 50,000+ jobs at top companies. Instant OTP login, 1-click apply, AI job matching. Join 2 lakh+ job seekers today.'
-  const metaKeywords    = seo.keywords    || 'jobs in india, job portal india, AI job matching, CosmosIQ careers, employment opportunities, hire talent india, job search 2025, naukri alternative, career portal pune'
+  const metaKeywords    = seo.keywords    || 'jobs in india, job portal india, AI job matching, CosmosIQ careers, employment opportunities, hire talent india, job search 2026, naukri alternative, career portal pune'
   const canonical       = seo.canonical   || `${BASE}${activePage === 'home' ? '/' : '/' + activePage}`
   const ogImage         = seo.ogImage     || `${BASE}/static/og-image.png`
   const ogType          = seo.ogType      || 'website'
@@ -37,7 +37,7 @@ export const layout = (
   <meta name="keywords" content="${metaKeywords}"/>
   <meta name="robots" content="${robotsContent}"/>
   <meta name="author" content="CosmosIQ Talent Solutions — Matriye Group, Pune"/>
-  <meta name="copyright" content="© 2025 CosmosIQ Talent Solutions. Matriye Group."/>
+  <meta name="copyright" content="© 2026 CosmosIQ Talent Solutions. Matriye Group."/>
   <meta name="language" content="en-IN"/>
   <meta name="geo.region" content="IN-MH"/>
   <meta name="geo.placename" content="Pune, Maharashtra, India"/>
@@ -295,7 +295,7 @@ ${body}
   <!-- Bottom Bar -->
   <div class="border-t border-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
-      <p class="text-gray-500 text-xs">© 2025 CosmosIQ Talent Solutions. A proud product of <a href="#" class="text-cosmos-400 hover:text-cosmos-300">Matriye Group</a>. All rights reserved.</p>
+      <p class="text-gray-500 text-xs">© 2026 CosmosIQ Talent Solutions. A proud product of <a href="#" class="text-cosmos-400 hover:text-cosmos-300">Matriye Group</a>. All rights reserved.</p>
       <div class="flex gap-5 text-xs text-gray-500">
         <a href="/privacy" class="hover:text-white transition">Privacy</a>
         <a href="/terms" class="hover:text-white transition">Terms</a>

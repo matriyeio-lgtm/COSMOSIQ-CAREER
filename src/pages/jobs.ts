@@ -165,12 +165,12 @@ export function jobsPage(query = '', location = '', category = '', type = ''): s
 `
   // Dynamic SEO for job search pages
   const pageTitle = query
-    ? `${query} Jobs in India 2025 — Search & Apply | CosmosIQ Careers`
-    : 'Browse Jobs in India 2025 — IT, Finance, Marketing & More | CosmosIQ Careers'
+    ? `${query} Jobs in India 2026 — Search & Apply | CosmosIQ Careers`
+    : 'Browse Jobs in India 2026 — IT, Finance, Marketing & More | CosmosIQ Careers'
   const pageDesc = query
     ? `Find the best ${query} jobs in India. ${filtered.length} verified openings at top companies. Apply now on CosmosIQ Careers — AI-powered job portal.`
     : `Search 50,000+ jobs in India across IT, software, finance, marketing, healthcare & engineering. Filter by location, salary & job type. AI-powered matching on CosmosIQ Careers.`
-  const pageKeywords = `${query ? query + ' jobs india, ' : ''}jobs in india 2025, IT jobs india, software developer jobs, finance jobs india, marketing jobs, remote jobs india, freshers jobs, experienced jobs india, job search india, apply online jobs`
+  const pageKeywords = `${query ? query + ' jobs india, ' : ''}jobs in india 2026, IT jobs india, software developer jobs, finance jobs india, marketing jobs, remote jobs india, freshers jobs, experienced jobs india, job search india, apply online jobs`
 
   return layout('Browse Jobs', body, 'jobs', {
     title: pageTitle,

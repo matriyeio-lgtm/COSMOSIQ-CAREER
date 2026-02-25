@@ -95,7 +95,7 @@ export function aboutPage(): string {
         { year: '2022', title: 'Series A Funding', desc: 'Raised ₹25Cr in Series A funding. Expanded to 20 cities across India. 1 million users milestone.' },
         { year: '2023', title: 'National Awards', desc: 'Won "Indian Iconic Online Learning Platform 2023". Surpassed 3 million users. Launched Employer Analytics.' },
         { year: '2024', title: 'AI v3.0 & Scale', desc: 'Launched AI v3.0 with 94% match accuracy. 5M+ users, 12K+ companies, ₹100Cr+ revenue milestone.' },
-        { year: '2025', title: 'CosmosIQ Enterprise', desc: 'Launched CosmosIQ Enterprise for Fortune 500 companies. International expansion to SEA & Middle East.' },
+        { year: '2026', title: 'CosmosIQ Enterprise', desc: 'Launched CosmosIQ Enterprise for Fortune 500 companies. International expansion to SEA & Middle East.' },
       ].map((t, i) => `
         <div class="flex gap-5">
           <div class="flex flex-col items-center">
@@ -217,7 +217,7 @@ export function blogPage(): string {
   return layout('Blog — Career Insights', body, 'blog', {
     title: 'Career Advice Blog — Job Tips, Resume & Interview Guide India | CosmosIQ',
     description: 'Free career advice for Indian job seekers. Expert tips on resume writing, interview preparation, salary negotiation, job search strategies and industry trends. Updated weekly by CosmosIQ experts.',
-    keywords: 'career advice india, job tips india, resume writing tips, interview preparation india, salary negotiation, career growth india, job search tips 2025, freshers career guide india',
+    keywords: 'career advice india, job tips india, resume writing tips, interview preparation india, salary negotiation, career growth india, job search tips 2026, freshers career guide india',
     canonical: 'https://cosmosiqcareers.com/blog'
   })
 }
@@ -462,9 +462,9 @@ export function companiesPage(): string {
 </div>
 `
   return layout('Top Companies', body, 'companies', {
-    title: 'Top Companies Hiring in India 2025 — Browse Employer Profiles | CosmosIQ',
+    title: 'Top Companies Hiring in India 2026 — Browse Employer Profiles | CosmosIQ',
     description: 'Browse 12,000+ top companies hiring in India. Explore employer profiles, open jobs, company culture and salaries for Google, Amazon, TCS, Infosys, startups and more. Apply directly on CosmosIQ Careers.',
-    keywords: 'top companies hiring india, employer profiles india, best companies to work india, IT companies hiring 2025, startup jobs india, MNC jobs india, google india jobs, amazon india jobs, tcs jobs, infosys jobs',
+    keywords: 'top companies hiring india, employer profiles india, best companies to work india, IT companies hiring 2026, startup jobs india, MNC jobs india, google india jobs, amazon india jobs, tcs jobs, infosys jobs',
     canonical: 'https://cosmosiqcareers.com/companies'
   })
 }
@@ -487,7 +487,7 @@ export function termsPage(): string {
   <div class="max-w-4xl mx-auto px-4 text-center">
     <!-- H1: Terms page -->
     <h1 class="text-3xl font-black mb-2">Terms &amp; Conditions — CosmosIQ Careers</h1>
-    <p class="text-white/70 text-sm">Last Updated: February 25, 2025</p>
+    <p class="text-white/70 text-sm">Last Updated: February 25, 2026</p>
   </div>
 </div>
 <div class="max-w-4xl mx-auto px-4 sm:px-6 py-12">
@@ -529,7 +529,7 @@ export function privacyPage(): string {
 <div class="gradient-hero text-white py-12">
   <div class="max-w-4xl mx-auto px-4 text-center">
     <h1 class="text-3xl font-black mb-2">Privacy Policy</h1>
-    <p class="text-white/70 text-sm">Last Updated: February 25, 2025 | Effective: March 1, 2025</p>
+    <p class="text-white/70 text-sm">Last Updated: February 25, 2026 | Effective: March 1, 2026</p>
   </div>
 </div>
 <div class="max-w-4xl mx-auto px-4 sm:px-6 py-12">

@@ -324,8 +324,8 @@ export function homePage(): string {
     <div class="flex items-center justify-between mb-10">
       <div>
         <span class="text-cosmos-600 font-semibold text-sm uppercase tracking-widest">Latest Openings</span>
-        <!-- H2 — Secondary keyword: trending jobs 2025 -->
-        <h2 class="text-3xl font-black text-gray-900 mt-1">Trending Jobs in India 2025</h2>
+        <!-- H2 — Secondary keyword: trending jobs 2026 -->
+        <h2 class="text-3xl font-black text-gray-900 mt-1">Trending Jobs in India 2026</h2>
       </div>
       <a href="/jobs" class="hidden md:flex items-center gap-2 text-cosmos-600 font-semibold text-sm hover:underline">
         View All Jobs <i class="fas fa-arrow-right"></i>
@@ -498,7 +498,7 @@ export function homePage(): string {
   return layout('Home', body, 'home', {
     title: 'CosmosIQ Careers — #1 AI-Powered Job Portal India | Find Jobs & Hire Talent',
     description: 'CosmosIQ Careers is India\'s leading AI-powered job portal. Search 50,000+ jobs in IT, finance, marketing & more. AI job matching, 1-click apply, instant OTP login. Join 2 lakh+ job seekers. Powered by Matriye Group, Pune.',
-    keywords: 'job portal india, jobs in india 2025, AI job matching, find jobs online india, top companies hiring india, naukri alternative, cosmosiq careers, job search pune, IT jobs india, freshers jobs india, remote jobs india, work from home jobs india',
+    keywords: 'job portal india, jobs in india 2026, AI job matching, find jobs online india, top companies hiring india, naukri alternative, cosmosiq careers, job search pune, IT jobs india, freshers jobs india, remote jobs india, work from home jobs india',
     canonical: 'https://cosmosiqcareers.com/',
     ogType: 'website'
   })
